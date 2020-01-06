@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <header>
+            <div class="container">
+                <nav>
+                    <ul>
+                        <li>
+                            <input v-model="search" type="text" placeholder="Search Title">
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </header>
+<div class="container">
+        <div id="posts">
+            <div v-for="post in searchInput" id="singlePost">
+                <img v-bind:src="post.img">
+                <h5 id="author">Author: {{post.author}}</h5>
+                <h3>Title: {{post.title}}</h3>
+                <p>{{post.blog}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        class Post {
+            constructor(img, author, title, blog) {
+                this.img = img;
+                this.author = author;
+                this.title = title;
+                this.blog = blog;
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            data: {
+                search: '',
+                blogPost: [
+                    new Post(
+                        'https://m.seonews.ru/upload/iblock/2b7/2b7ed6b1d33e6d052c496f9b2d44c7bc.jpg',
+                        'Сундар Пичаи',
+                        'Google',
+                        'This is (probably) our last Keyword post of 2019 (and the decade). It’s cliche to talk about the passage of time, but as a new parent—my son was just a few weeks old at the time of this wrap-up post last December—I have an especially keen sense of how much can happen in a year. I also know it’s important to savor the individual moments. In that spirit, let’s look back at the stories that we shared from Google in 2019.'
+                    ),
+                    new Post(
+                        'https://img.comss.net/fit-in/200x200/filters:fill(FFFFFF)/logo/yandex-logo.png',
+                        'Аркадий Юрьевич Волож',
+                        'Я́ндекс',
+                        'Каждый год в декабре аналитики Яндекса определяют главные темы года. Они изучают поисковые запросы и составляют списки людей, событий, сериалов — в общем, всего того, что было в центре внимания россиян в течение года. Уровень интереса к теме определяется не по общему числу запросов — иначе топы были бы непоказательны, — а по тому, как выросло это число по сравнению с прошлым годом.'
+                    ),
+                    new Post(
+                        'https://searchengineland.com/figz/wp-content/seloads/2016/02/bing-teal-logo-wordmark5-1920.jpg',
+                        'Стив Балмер',
+                        'Bing',
+                        'Bing is adopting Microsoft Edge as the engine to run JavaScript and render web pages. In the coming months, we will switch to Microsoft Edge for all sites with the new user agents shared in this post.'
+                    ),
+                ]
+            },
+            computed: {
+                searchInput() {
+                    return this.blogPost.filter(post => {
+                        return post.title.toLowerCase().includes(this.search.toLowerCase())
+                    })
+                }
+            },
+        })
+    </script>
+
+</body>
+
+</html>
