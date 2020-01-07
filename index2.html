@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <!-- 2. Реализовать редактируемые текстовой тег. Например: дан тег 
+<p> c текстом «Измени моё содержимое». По нажатию на него 
+открывается всплывающее окошко с элементов input по средству 
+которого можно изменить содержимое тега <p>. Ещё пример как 
+можно реализовать можно увидеть на этом сайте: 
+https://ruseller.com/lessons/les446/example/code.html# 
+Здесь представлен пример организации редактирования 
+текста в <li> элементах. -->
+
+    <div id="app">
+        <div v-on:click="hideEditor">
+            <div id="editor" v-on:click.stop v-if="edit">
+                <input type="text" v-model="text">
+            </div>
+            <p v-on:click.stop="toggle" style="text-align: center;">{{text}}</p>
+        </div> 
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                edit: false,
+                text: 'click here',
+            },
+            methods: {
+                hideEditor: function () {
+                    this.edit = false;
+                },
+                toggle: function () {
+                    this.edit = !this.edit;
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
